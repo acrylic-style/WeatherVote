@@ -1,0 +1,12 @@
+name: WeatherVote
+main: xyz.acrylicstyle.weather.WeatherVote
+version: 0.0.1
+commands:
+  awv:
+    description: "Weather vote (server)"
+  wv:
+    description: "Weather vote (player)"
+  voteyes:
+    description: "Yes"
+  voteno:
+    description: "Nope"
