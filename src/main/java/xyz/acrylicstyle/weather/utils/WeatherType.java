@@ -7,9 +7,9 @@ public enum WeatherType {
     THUNDER(ChatColor.YELLOW + "雷", true, true),
     CLEAR(ChatColor.GOLD + "晴れ", false);
 
-    private String name;
-    private boolean storm;
-    private boolean thunder;
+    private final String name;
+    private final boolean storm;
+    private final boolean thunder;
 
     WeatherType(String name, boolean storm) {
         this(name, storm, false);

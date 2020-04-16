@@ -3,7 +3,7 @@ package xyz.acrylicstyle.weather.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
-import xyz.acrylicstyle.tomeito_core.command.PlayerCommandExecutor;
+import xyz.acrylicstyle.tomeito_api.command.PlayerCommandExecutor;
 
 /**
  * It's actually isn't a vote

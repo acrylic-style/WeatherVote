@@ -11,7 +11,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import xyz.acrylicstyle.craftbukkit.CraftUtils;
-import xyz.acrylicstyle.tomeito_core.command.PlayerCommandExecutor;
+import xyz.acrylicstyle.tomeito_api.command.PlayerCommandExecutor;
 import xyz.acrylicstyle.weather.WeatherVote;
 import xyz.acrylicstyle.weather.utils.WeatherType;
 

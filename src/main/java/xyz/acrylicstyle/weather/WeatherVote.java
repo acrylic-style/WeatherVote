@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import util.CollectionList;
-import xyz.acrylicstyle.tomeito_core.TomeitoLib;
+import xyz.acrylicstyle.tomeito_api.TomeitoAPI;
 import xyz.acrylicstyle.weather.commands.*;
 import xyz.acrylicstyle.weather.utils.WeatherType;
 
@@ -29,10 +29,10 @@ public class WeatherVote extends JavaPlugin {
     public void onEnable() {
         Objects.requireNonNull(Bukkit.getPluginCommand("awv")).setTabCompleter(new WeatherVoteTabCompleter());
         Objects.requireNonNull(Bukkit.getPluginCommand("wv")).setTabCompleter(new WeatherVoteTabCompleter());
-        TomeitoLib.registerCommand("awv", new AllWeatherVote());
-        TomeitoLib.registerCommand("wv", new WeatherVoteCmd());
-        TomeitoLib.registerCommand("voteyes", new VoteYes());
-        TomeitoLib.registerCommand("voteno", new VoteNo());
+        TomeitoAPI.registerCommand("awv", new AllWeatherVote());
+        TomeitoAPI.registerCommand("wv", new WeatherVoteCmd());
+        TomeitoAPI.registerCommand("voteyes", new VoteYes());
+        TomeitoAPI.registerCommand("voteno", new VoteNo());
     }
 
     public static void vote(Player player, boolean yes) {
