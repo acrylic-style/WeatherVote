@@ -1,6 +1,8 @@
 name: WeatherVote
 main: xyz.acrylicstyle.weather.WeatherVote
 version: 0.0.1
+depend:
+  - TomeitoLib
 commands:
   awv:
     description: "Weather vote (server)"
