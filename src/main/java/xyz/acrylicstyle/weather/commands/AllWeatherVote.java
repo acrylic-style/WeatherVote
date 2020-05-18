@@ -43,7 +43,7 @@ public class AllWeatherVote extends PlayerCommandExecutor {
         WeatherVote.voting = true;
         WeatherVote.weatherType = weatherType;
         for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + ChatColor.YELLOW + "が天気を" + weatherType.getName() + ChatColor.YELLOW + "に変更する投票を開始しました。");
+        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + ChatColor.YELLOW + "が" + ChatColor.GOLD + player.getWorld().getName().toLowerCase() + ChatColor.YELLOW + "で天気を" + weatherType.getName() + ChatColor.YELLOW + "に変更する投票を開始しました。");
         TextComponent text = new TextComponent();
         TextComponent yes = new TextComponent(ChatColor.YELLOW + "[" + ChatColor.GREEN + "変更する" + ChatColor.YELLOW + "]");
         yes.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] {
