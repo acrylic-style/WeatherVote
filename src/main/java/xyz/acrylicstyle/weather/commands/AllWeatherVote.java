@@ -16,6 +16,7 @@ import xyz.acrylicstyle.weather.WeatherVote;
 import xyz.acrylicstyle.weather.utils.WeatherType;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.NoSuchElementException;
 
 public class AllWeatherVote extends PlayerCommandExecutor {
     @Override
@@ -42,8 +43,10 @@ public class AllWeatherVote extends PlayerCommandExecutor {
         WeatherVote.voteYes.add(player.getUniqueId());
         WeatherVote.voting = true;
         WeatherVote.weatherType = weatherType;
+        World world = player.getWorld();
+        String worldn = world.getName();
         for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + ChatColor.YELLOW + "が" + ChatColor.GOLD + player.getWorld().getName().toLowerCase() + ChatColor.YELLOW + "で天気を" + weatherType.getName() + ChatColor.YELLOW + "に変更する投票を開始しました。");
+        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + ChatColor.YELLOW + "が" + ChatColor.GOLD + world.getName().toLowerCase() + ChatColor.YELLOW + "で天気を" + weatherType.getName() + ChatColor.YELLOW + "に変更する投票を開始しました。");
         TextComponent text = new TextComponent();
         TextComponent yes = new TextComponent(ChatColor.YELLOW + "[" + ChatColor.GREEN + "変更する" + ChatColor.YELLOW + "]");
         yes.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[] {
@@ -69,8 +72,7 @@ public class AllWeatherVote extends PlayerCommandExecutor {
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&a「変更する」&eが&c" + WeatherVote.voteYes.size()
                             + "&e票、&c「変更しない」&eが&c" + WeatherVote.voteNope.size() + "&e票で&a「変更する」&eが多いため、天気を" + weatherType.getName() + "&eに変更します。"));
                     Bukkit.broadcastMessage(ChatColor.GRAY + "天気が反映されない人は、" + ChatColor.YELLOW + "/wv reset" + ChatColor.GRAY + "を実行してみてください。");
-                    World world = Bukkit.getWorld("world");
-                    if (world == null) throw new NullPointerException("Couldn't find world!");
+                    if (Bukkit.getWorld(worldn) == null) throw new NoSuchElementException("World " + worldn + " unloaded, cannot modify weather.");
                     try {
                         Object nmsWorld = CraftUtils.getHandle(world);
                         Object worldData = nmsWorld.getClass().getMethod("getWorldData").invoke(nmsWorld);
