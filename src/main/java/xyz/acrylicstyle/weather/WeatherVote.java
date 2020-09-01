@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import util.CollectionList;
 import xyz.acrylicstyle.tomeito_api.TomeitoAPI;
+import xyz.acrylicstyle.tomeito_api.providers.ConfigProvider;
 import xyz.acrylicstyle.weather.commands.*;
 import xyz.acrylicstyle.weather.utils.WeatherType;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 public class WeatherVote extends JavaPlugin {
     public static WeatherVote instance = null;
+    public static ConfigProvider config = null;
 
     public static boolean voting = false;
     public static WeatherType weatherType = null;
@@ -27,6 +29,7 @@ public class WeatherVote extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        config = ConfigProvider.getConfig("./plugins/WeatherVote/config.yml");
         Objects.requireNonNull(Bukkit.getPluginCommand("awv")).setTabCompleter(new WeatherVoteTabCompleter());
         Objects.requireNonNull(Bukkit.getPluginCommand("wv")).setTabCompleter(new WeatherVoteTabCompleter());
         TomeitoAPI.registerCommand("awv", new AllWeatherVote());
@@ -34,6 +37,8 @@ public class WeatherVote extends JavaPlugin {
         TomeitoAPI.registerCommand("voteyes", new VoteYes());
         TomeitoAPI.registerCommand("voteno", new VoteNo());
     }
+
+    // not saving config intentionally (no need to save)
 
     public static void vote(Player player, boolean yes) {
         if (!voting) {

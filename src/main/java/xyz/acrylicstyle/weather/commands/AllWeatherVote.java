@@ -21,7 +21,11 @@ import java.util.NoSuchElementException;
 public class AllWeatherVote extends PlayerCommandExecutor {
     @Override
     public void onCommand(Player player, String[] args) {
-        if (Bukkit.getWorld("world") == null) throw new NullPointerException("Couldn't find world!");
+        if (WeatherVote.config.getLong("cooldown." + player.getUniqueId(), 0) > System.currentTimeMillis()) {
+            long seconds = (WeatherVote.config.getLong("cooldown." + player.getUniqueId(), 0) - System.currentTimeMillis()) / 1000L;
+            player.sendMessage(ChatColor.RED + "現在クールダウン中です。 " + ChatColor.YELLOW + "(あと" + ChatColor.RED + seconds + ChatColor.YELLOW + "秒)");
+            return;
+        }
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "/awv sun/thunder/rain/reset");
             return;
@@ -32,7 +36,11 @@ public class AllWeatherVote extends PlayerCommandExecutor {
             startVoting(player, WeatherType.RAIN);
         } else if (args[0].equalsIgnoreCase("thunder") || args[0].equalsIgnoreCase("t")) {
             startVoting(player, WeatherType.THUNDER);
-        } else player.sendMessage(ChatColor.RED + "/awv sun/thunder/rain/reset");
+        } else {
+            player.sendMessage(ChatColor.RED + "/awv sun/thunder/rain/reset");
+            return;
+        }
+        WeatherVote.config.set("cooldown." + player.getUniqueId(), System.currentTimeMillis() + 1000 * 60 * 10); // 10 minutes
     }
 
     private void startVoting(Player player, WeatherType weatherType) {
